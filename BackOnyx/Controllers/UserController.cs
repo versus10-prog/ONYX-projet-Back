@@ -13,29 +13,43 @@ namespace BackOnyx.Controllers
 
         
         [HttpGet("{userName}")]
-        public bool Get(string userName)
+        public IActionResult Get(string userName)
         {
-            MySqlConnection connection = Config.configInstance();
-            User user = new User(connection);
-            return user.UserExist(userName);
+            try
+            {
+                MySqlConnection connection = Config.configInstance();
+                User user = new User(connection);
+
+                return Ok(user.UserExist(userName));
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
 
         
         [HttpPost]
-        public bool Post([FromBody] string userName)
+        public IActionResult Post([FromBody] string userName)
         {
-            
-            MySqlConnection connection = Config.configInstance();
-            User user = new User(connection);
+            try
+            {
+                MySqlConnection connection = Config.configInstance();
+                User user = new User(connection);
 
-            if(user.UserExist(userName)) 
-            {
-                return false;
+                if (user.UserExist(userName))
+                {
+                    return Ok(false);
+                }
+                else
+                {
+                    user.AddUser(userName);
+                    return Ok(true);
+                }
             }
-            else
+            catch
             {
-                user.AddUser(userName);
-                return true;
+                return BadRequest();
             }
             
         }

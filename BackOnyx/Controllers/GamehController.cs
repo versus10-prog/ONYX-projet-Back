@@ -13,24 +13,41 @@ namespace BackOnyx.Controllers
     public class GamehController : ControllerBase
     {
         [HttpGet]
-        public string GetGameh()
+        public ActionResult<string> GetGameh()
         {
-            MySqlConnection connection = Config.configInstance();
-            Gameh gameh = new Gameh(connection);
-            List<Object> liste = gameh.getBestScore();
+            try
+            {
+                MySqlConnection connection = Config.configInstance();
+                Gameh gameh = new Gameh(connection);
+                List<Object> liste = gameh.getBestScore();
 
-            return JsonConvert.SerializeObject(liste);
+                return Ok(JsonConvert.SerializeObject(liste));
+            }
+            catch
+            {
+                return BadRequest();
+
+            }
+            
         }
 
 
         [HttpPost]
-        public void Post([FromBody] string userName, int bestTime, int averageTime)
+        public IActionResult Post(string userName, int bestTime, int averageTime)
         {
-            MySqlConnection connection = Config.configInstance();
-            Gameh gameh = new Gameh(connection);
-            GamehModel gamehM = new GamehModel(userName, DateTime.Now, averageTime, bestTime);
+            try
+            {
+                MySqlConnection connection = Config.configInstance();
+                Gameh gameh = new Gameh(connection);
+                GamehModel gamehM = new GamehModel(userName, DateTime.Now, averageTime, bestTime);
 
-            gameh.addGameh(gamehM);
+                gameh.addGameh(gamehM);
+                return Ok();
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }
