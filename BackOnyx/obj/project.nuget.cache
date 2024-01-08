@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2LRt8ryc5GKOwOMbECfGh1TCbVCWAAWfzQZxOOOwxAXEQB4gS5yWQFPR3pMN6wj/xJNFsJKaHqCjXAQeQ6cr9g==",
+  "dgSpecHash": "xoiw3AOM8x2ARoBpliS7uuEKsxRPsIdkIi3y+v3IeAj9NiHSBwknet9foIqMpOFNOF7lW9xP+0QwsfVboCj4wA==",
   "success": true,
   "projectFilePath": "D:\\BUT_1\\semestre_3\\STAGE\\ONYX-projet-Back\\BackOnyx\\BackOnyx.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "C:\\Users\\user\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\mysql.data\\8.2.0\\mysql.data.8.2.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
