@@ -43,11 +43,10 @@ namespace BackOnyx.DB
             _connection.Open();
 
 
-            string requete = "INSERT INTO user (user_name, password) VALUES (@user_name, @password)";
+            string requete = "INSERT INTO user (user_name) VALUES (@user_name)";
 
             MySqlCommand cmd = new MySqlCommand(requete, _connection);
             cmd.Parameters.AddWithValue("@user_name", userName);
-            cmd.Parameters.AddWithValue("@password", "test");
 
             cmd.ExecuteNonQuery();
 
