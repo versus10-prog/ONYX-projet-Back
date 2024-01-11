@@ -1,11 +1,13 @@
 ﻿using BackOnyx.DB;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
+using System.Web.Http.Cors;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace BackOnyx.Controllers
 {
+ 
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -32,6 +34,7 @@ namespace BackOnyx.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] string userName)
         {
+            Console.WriteLine(userName);
             try
             {
                 MySqlConnection connection = Config.configInstance();
@@ -39,12 +42,12 @@ namespace BackOnyx.Controllers
 
                 if (user.UserExist(userName))
                 {
-                    return Ok(false);
+                    return Ok();
                 }
                 else
                 {
                     user.AddUser(userName);
-                    return Ok(true);
+                    return Ok();
                 }
             }
             catch

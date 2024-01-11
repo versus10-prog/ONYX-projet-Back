@@ -2,22 +2,13 @@
 {
     public class GamedModel
     {
-        private readonly int _time;
-        private readonly int _numPart;
+        public int Time { get; private set; }
+        public int NumPart { get; private set; }
 
-        public GamedModel (int time, int numPart)
+        public GamedModel(int time, int numPart)
         {
-            _time = time;
-            _numPart = numPart;
-        }
-
-        public int getTime ()
-        {
-            return _time;
-        }
-        public int getNumPart ()
-        {
-            return _numPart;
+            Time = time;
+            NumPart = numPart;
         }
     }
 }

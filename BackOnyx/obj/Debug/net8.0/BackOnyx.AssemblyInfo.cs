@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BackOnyx")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5e1a48974f9a085dcd5e0e7325b8f4aaca2ae6b0")]
 [assembly: System.Reflection.AssemblyProductAttribute("BackOnyx")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BackOnyx")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

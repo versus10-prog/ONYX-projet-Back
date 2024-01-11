@@ -1,6 +1,7 @@
 ﻿using BackOnyx.Models;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Asn1.X509;
+using static Google.Protobuf.Reflection.UninterpretedOption.Types;
 
 
 namespace BackOnyx.DB
@@ -14,21 +15,26 @@ namespace BackOnyx.DB
             _connection = connection;
         }
 
-        public void addGameh(GamehModel gamehM)
+        public int addGameh(GamehModel gamehM)
         {
             _connection.Open();
 
             string requette = "INSERT INTO gameh (best_time, average_time, date, user_name) VALUES (@best_time, @average_time, @date, @user_name)";
             
             MySqlCommand cmd = new MySqlCommand(requette, _connection);
+            
             cmd.Parameters.AddWithValue("@user_name", gamehM.getUserName());
             cmd.Parameters.AddWithValue("@best_time", gamehM.getBestTime());
             cmd.Parameters.AddWithValue("@average_time", gamehM.getAverageTime());
             cmd.Parameters.AddWithValue("@date", gamehM.getDate());
 
             cmd.ExecuteNonQuery();
-
             _connection.Close();
+            int numPart = this.getNumPart();
+
+            
+
+            return numPart;
         }
 
         public List<Object> getBestScore() 
@@ -52,9 +58,58 @@ namespace BackOnyx.DB
             }
 
             _connection.Close();
-
+            
             return listeBest;
 
+        }
+
+        public int getNumPart()
+        {
+            int numPart = -1;
+
+            try
+            {
+                _connection.Open();
+            
+                string requette = "SELECT LAST_INSERT_ID() AS num_click";
+                MySqlCommand cmd = new MySqlCommand(requette, _connection);
+
+                object data = cmd.ExecuteScalar();
+                if (data != null)
+                {
+                    numPart = Convert.ToInt32(data);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"error: {ex.Message}");
+            }
+            finally { _connection.Close(); }
+            
+            return numPart;
+        }
+
+        public void putData(int numPart, int bestTime, int averageTime)
+        {
+            try
+            {
+                _connection.Open();
+                string requette = "UPDATE gameh SET best_time = @best_time, average_time = @average_time where num_part = @num_part";
+                MySqlCommand cmd = new MySqlCommand(requette, _connection);
+                cmd.Parameters.AddWithValue("@best_time", bestTime);
+                cmd.Parameters.AddWithValue("@average_time", averageTime);
+                cmd.Parameters.AddWithValue("@num_part", numPart);
+                cmd.ExecuteNonQuery();
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("erreur :  "+ ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
         }
     }
 }

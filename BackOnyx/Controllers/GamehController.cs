@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace BackOnyx.Controllers
@@ -21,32 +22,50 @@ namespace BackOnyx.Controllers
                 Gameh gameh = new Gameh(connection);
                 List<Object> liste = gameh.getBestScore();
 
-                return Ok(JsonConvert.SerializeObject(liste));
+                return StatusCode(200,JsonConvert.SerializeObject(liste));
             }
             catch
             {
-                return BadRequest();
 
+
+                // Retournez une réponse d'erreur avec un statut 500
+                return StatusCode(500, "Internal Server Error");
             }
-            
         }
 
-
         [HttpPost]
-        public IActionResult Post(string userName, int bestTime, int averageTime)
+        public IActionResult Post([FromBody] string userName)
         {
             try
             {
                 MySqlConnection connection = Config.configInstance();
                 Gameh gameh = new Gameh(connection);
-                GamehModel gamehM = new GamehModel(userName, DateTime.Now, averageTime, bestTime);
+                GamehModel gamehM = new GamehModel(userName, DateTime.Now,0,0);
 
-                gameh.addGameh(gamehM);
-                return Ok();
+                int numPart = gameh.addGameh(gamehM);
+                return StatusCode(200, JsonConvert.SerializeObject(numPart));
             }
-            catch
+            catch(Exception ex)
             {
-                return BadRequest();
+                Console.WriteLine($"erreur : {ex.Message}");
+               return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+        [HttpPut]
+        public IActionResult Put([FromBody] AverBestModel model)
+        {
+            try
+            {
+                MySqlConnection connection = Config.configInstance();
+                Gameh gameh = new Gameh(connection);
+                gameh.putData(model.NumPart, model.Best, model.Average);
+                return StatusCode(200);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"erreur : {ex.Message}");
+                return StatusCode(500, "Internal Server Error");
             }
         }
     }

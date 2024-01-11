@@ -19,12 +19,14 @@ namespace BackOnyx.DB
             string requette = "INSERT INTO gamed (crono, num_part) values (@crono, @num_part)";
 
             MySqlCommand cmd = new MySqlCommand(requette, _connection);
-            cmd.Parameters.AddWithValue("@crono", gamed.getTime());
-            cmd.Parameters.AddWithValue("@num_part", gamed.getNumPart());
+            cmd.Parameters.AddWithValue("@crono", gamed.Time);
+            cmd.Parameters.AddWithValue("@num_part", gamed.NumPart);
 
             cmd.ExecuteNonQuery();
             _connection.Close();
         }
+
+        
 
         public int getBestGamed(int numPart)
         {

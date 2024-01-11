@@ -110,3 +110,8 @@ D:\BUT_1\semestre_3\STAGE\ONYX-projet-Back\BackOnyx\obj\Debug\net8.0\BackOnyx.cs
 D:\BUT_1\semestre_3\STAGE\ONYX-projet-Back\BackOnyx\obj\Debug\net8.0\BackOnyx.genruntimeconfig.cache
 D:\BUT_1\semestre_3\STAGE\ONYX-projet-Back\BackOnyx\obj\Debug\net8.0\ref\BackOnyx.dll
 D:\BUT_1\semestre_3\STAGE\ONYX-projet-Back\BackOnyx\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\BUT_1\semestre_3\STAGE\ONYX-projet-Back\BackOnyx\bin\Debug\net8.0\System.Web.Cors.dll
+D:\BUT_1\semestre_3\STAGE\ONYX-projet-Back\BackOnyx\bin\Debug\net8.0\System.Net.Http.Formatting.dll
+D:\BUT_1\semestre_3\STAGE\ONYX-projet-Back\BackOnyx\bin\Debug\net8.0\System.Web.Http.dll
+D:\BUT_1\semestre_3\STAGE\ONYX-projet-Back\BackOnyx\bin\Debug\net8.0\System.Web.Http.Cors.dll
+D:\BUT_1\semestre_3\STAGE\ONYX-projet-Back\BackOnyx\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll

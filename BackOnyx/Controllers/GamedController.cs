@@ -1,8 +1,10 @@
 ﻿using BackOnyx.DB;
 using BackOnyx.Models;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json.Linq;
 
 namespace BackOnyx.Controllers
 {
@@ -10,22 +12,26 @@ namespace BackOnyx.Controllers
     [ApiController]
         public class GamedController : ControllerBase
         {
-        [HttpGet("bestGame/{numPart}")]
+        [HttpGet("{numPart}")]
 
-        public ActionResult<int> GetBestGame(int numPart)
+        public ActionResult<AverBestModel> GetBestGame(int numPart)
         {
             try
             {
                 MySqlConnection connection = Config.configInstance();
                 Gamed gamed = new Gamed(connection);
+                int average = gamed.getAverageGamed(numPart);
 
-                int nb = gamed.getBestGamed(numPart);
+                int max = gamed.getBestGamed(numPart);
 
-                if (nb < 0)
+                if (max < 0 || average < 0)
                 {
                     return BadRequest();
                 }
-                return nb;
+
+                var result = new AverBestModel( average, max, numPart );
+                
+                return result;
 
             }
             catch
@@ -34,36 +40,16 @@ namespace BackOnyx.Controllers
             }
         }
 
-            [HttpGet("averageGame/{numPart}")]
-
-        public ActionResult<int> GetAverageGame(int numPart)
-        {
-            try
-            {
-                MySqlConnection connection = Config.configInstance();
-                Gamed gamed = new Gamed(connection);
-                int nb = gamed.getAverageGamed(numPart);
-
-                if (nb < 0)
-                {
-                    return BadRequest();
-                }
-                return nb;
-            }
-            catch
-            {
-                return BadRequest();
-            }
-        }
-    
 
 
             [HttpPost]
 
-            public IActionResult Post(int time, int numPart) 
+            public IActionResult Post([FromBody] GamedModel data) 
             {
                 try
             {
+                int time = data.Time;
+                int numPart = data.NumPart;
                 MySqlConnection connection = Config.configInstance();
                 Gamed gamed = new Gamed(connection);
                 GamedModel gamedM = new GamedModel(time, numPart);
